@@ -1,0 +1,14 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+def test_google_search():
+    driver = webdriver.Chrome()
+    try:
+        driver.get("https://www.google.com")
+        assert "Google" in driver.title
+        search_box = driver.find_element(By.NAME, "q")
+        search_box.send_keys("QA Engineer")
+        search_box.submit()
+        assert "QA Engineer" in driver.page_source
+    finally:
+        driver.quit()
